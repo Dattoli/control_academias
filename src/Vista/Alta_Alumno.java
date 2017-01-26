@@ -57,10 +57,11 @@ public class Alta_Alumno extends javax.swing.JFrame {
         jTxtCorreo = new javax.swing.JTextField();
         jTxtEdad = new javax.swing.JTextField();
         jCSexo = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         jTextField3.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
@@ -89,7 +90,7 @@ public class Alta_Alumno extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("HORARIO:");
 
-        jCClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ELEGIR", "COREANO BASICO", "COREANO INTERMEDIO", "INGLES BASICO", "INGLES INTERMEDIO", "FRANCES BASICO", "FRANCES INTERMEDIO" }));
+        jCClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ELEGIR", "COREANO BASICO", "COREANO INTERMEDIO", "INGLES BASICO", "INGLES INTERMEDIO", "FRANCES BASICO", "FRANCES INTERMEDIO", "GUITARRA BASICO", "GUITARRA INTERMEDIO" }));
 
         jCHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"ELEGIR", "13:00-15:00", "15:00-17:00"}));
 
@@ -112,6 +113,15 @@ public class Alta_Alumno extends javax.swing.JFrame {
         jLabel11.setText("SEXO:");
 
         jCSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ELEGIR", "MASCULINO", "FEMENINO"}));
+
+        jButton1.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 0, 0));
+        jButton1.setText("VOLVER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,12 +163,8 @@ public class Alta_Alumno extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTxtTelefono)
-                                    .addComponent(jCClase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jBEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(90, 90, 90))))
+                                    .addComponent(jCClase, 0, 203, Short.MAX_VALUE)
+                                    .addComponent(jCHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +179,12 @@ public class Alta_Alumno extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(141, 141, 141)
-                                .addComponent(jCSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jCSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -223,9 +234,11 @@ public class Alta_Alumno extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jCHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jBEnviar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBEnviar)
+                    .addComponent(jButton1))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,6 +266,12 @@ public class Alta_Alumno extends javax.swing.JFrame {
             a.setVisible(true);
         }
     }//GEN-LAST:event_jBEnviarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Principal p = new Principal();
+        this.dispose();
+        p.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +310,7 @@ public class Alta_Alumno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEnviar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCClase;
     private javax.swing.JComboBox<String> jCHorario;
     private javax.swing.JComboBox<String> jCSexo;

@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import Controlador.Clases;
 import Controlador.Conexion;
-import Controlador.Usuarios;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class LoginUsuario {
@@ -31,7 +32,7 @@ public class LoginUsuario {
       return tareas;
    }
    
-   public int loginUsuario(String usuario, String password) throws SQLException, ClassNotFoundException{
+   public int loginUsuario(String usuario, String password){
        this.usuario = usuario;
        this.password = password;
        int resultado = 0;
@@ -40,26 +41,36 @@ public class LoginUsuario {
        Conexion con = new Conexion();
        Connection conn = null;
        
-       con.conectar();
+       try {
+           conn = con.conectar();
+       } catch (SQLException ex) {
+           Logger.getLogger(LoginUsuario.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(LoginUsuario.class.getName()).log(Level.SEVERE, null, ex);
+       }
        
        sql = "SELECT * FROM usuarios WHERE usuario = '"+usuario+"' and password = '"+password+"'";
        //JOptionPane.showMessageDialog(null, sql);
        
-       conn = con.conectar();
-       Statement st = conn.createStatement();
-       ResultSet rs = st.executeQuery(sql);
        
-       if(rs.next()){
-           resultado = 1;
-       }else{
-           resultado = 0;
+       Statement st;
+       try {
+           st = conn.createStatement();
+           ResultSet rs = st.executeQuery(sql);
+       
+            if(rs.next()){
+                resultado = 1;
+            }else{
+                resultado = 0;
+            }
+            JOptionPane.showMessageDialog(null, "Bienvenido: "+rs.getString("nombre"));
+            
+            st.close();
+            conn.close();
+            con.cerrar();
+       } catch (SQLException ex) {
+           Logger.getLogger(LoginUsuario.class.getName()).log(Level.SEVERE, null, ex);
        }
-       
-       JOptionPane.showMessageDialog(null, "Bienvenido: "+rs.getString("nombre"));
-       
-       st.close();
-       conn.close();
-       con.cerrar();  
        
        return resultado;
    }

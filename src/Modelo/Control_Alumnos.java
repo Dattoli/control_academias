@@ -1,5 +1,6 @@
 package Modelo;
 
+import Controlador.Alumno;
 import Controlador.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,6 +43,8 @@ public class Control_Alumnos {
         this.telefono=telefono;
         this.clase=clase;
         this.horario=horario;
+    }
+    public Control_Alumnos(){
     }
     
     public int insertaUsuario(){
@@ -90,6 +93,49 @@ public class Control_Alumnos {
         return resultado;
     }
     
+    public Alumno recuperaAlumno(Alumno alumno){
+        this.id_alumno = alumno.getId_alumno();
+        String sql = "";
+        Conexion con = new Conexion();
+        Connection conn = null;
+        Statement st;
+        ResultSet rs;
+        
+        sql = "SELECT id_alumno, nombre, apellido_paterno, id_clase_registrada, status "
+                + "FROM alumno WHERE id_alumno = '"+id_alumno+"'";
+        
+        JOptionPane.showMessageDialog(null, sql);
+        
+        try {
+            conn = con.conectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la BD");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error desconocido al intentar conectarse");
+        }
+        
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            
+            if(rs.next()){
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setId_alumno(rs.getString("id_alumno"));
+                alumno.setApellido_paterno(rs.getString("apellido_paterno"));
+                
+                return alumno;
+            }else{
+                JOptionPane.showMessageDialog(null, "Alummno Inexistente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return alumno;
+    }
+    
     public String recuperaID() throws SQLException, ClassNotFoundException{
         String sql="";
         int resultadob=0;
@@ -106,7 +152,16 @@ public class Control_Alumnos {
             //JOptionPane.showMessageDialog(null, rs.getString("id_alumno"));
             resultado = rs.getString("id_alumno");
             resultadob =Integer.parseInt(resultado)+1;
-            resultado = "0000"+ resultadob;
+            if(resultadob<10){
+                resultado = "0000"+ resultadob;
+            }else if(resultadob>=10 && resultadob<100){
+                resultado = "000"+ resultadob;
+            }else if(resultadob>=100 && resultadob<1000){
+                resultado = "00"+ resultadob;
+            }else{
+                resultado = "0000"+ resultadob;
+            }
+            
         }else{
             resultado = "00001";
         }
