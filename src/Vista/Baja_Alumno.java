@@ -6,7 +6,9 @@
 package Vista;
 
 import Controlador.Alumno;
+import Controlador.Clases;
 import Modelo.Control_Alumnos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,11 +16,12 @@ import Modelo.Control_Alumnos;
  */
 public class Baja_Alumno extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Baja_Alumno
-     */
+    Principal pr = new Principal();
+    
     public Baja_Alumno() {
         initComponents();
+        jChBaja.setVisible(false);
+        
     }
 
     /**
@@ -34,7 +37,10 @@ public class Baja_Alumno extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jTxtID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLblNombre = new javax.swing.JLabel();
+        jLblStatus = new javax.swing.JLabel();
+        jChBaja = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +57,25 @@ public class Baja_Alumno extends javax.swing.JFrame {
 
         jLabel2.setText("ID ALUMNO:");
 
+        jLblNombre.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        jLblNombre.setForeground(new java.awt.Color(204, 0, 0));
+
+        jLblStatus.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        jLblStatus.setForeground(new java.awt.Color(204, 0, 0));
+
+        jChBaja.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+        jChBaja.setForeground(new java.awt.Color(0, 0, 153));
+        jChBaja.setText("DAR DE BAJA");
+
+        jButton1.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 153));
+        jButton1.setText("ENVIAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,15 +84,21 @@ public class Baja_Alumno extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTxtID, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jChBaja)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,9 +111,15 @@ public class Baja_Alumno extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTxtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jChBaja)
+                        .addComponent(jButton1)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,14 +127,39 @@ public class Baja_Alumno extends javax.swing.JFrame {
 
     private void jTxtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtIDActionPerformed
         Control_Alumnos ca=new Control_Alumnos();
+        Clases clase =new Clases();
         Alumno al=new Alumno();
         
         al.setId_alumno(jTxtID.getText().toString());
         
-        ca.recuperaAlumno(al);
+        ca.recuperaAlumno(al, clase);
         
-        jLabel3.setText(al.getNombre());
+        if(al.getStatus().toUpperCase().equals("ACTIVO")||al.getStatus().toUpperCase().equals("INACTIVO")){
+            jLblNombre.setText(al.getNombre()+" "+al.getApellido_paterno()+" "+clase.getNombreClase().toUpperCase());
+            jLblStatus.setText(al.getStatus());
+            jChBaja.setVisible(true);
+        }else{
+            jLblNombre.setText("ALUMNO NO EXISTENTE EN LA BASE DE DATOS, FAVOR DE VERIFICAR");
+        }    
     }//GEN-LAST:event_jTxtIDActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int bandera;
+        if(jChBaja.isSelected()){
+            Control_Alumnos ca = new Control_Alumnos();
+            bandera = ca.bajaAlumno(jTxtID.getText());
+            
+            if(bandera == 1){
+                JOptionPane.showMessageDialog(null, "El Alumno ha sido dado de baja exitosamente");
+                this.dispose();
+                pr.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido dar de baja al Alumno");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Primero debes seleccionar la casilla de dar de baja");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,12 +194,16 @@ public class Baja_Alumno extends javax.swing.JFrame {
                 new Baja_Alumno().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jChBaja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLblNombre;
+    private javax.swing.JLabel jLblStatus;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTxtID;
     // End of variables declaration//GEN-END:variables

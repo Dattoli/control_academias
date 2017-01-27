@@ -13,6 +13,7 @@ public class Alumno {
     private String email              = "";
     private int edad                  = 0;
     private String sexo               = "";
+    private String status             = "";
 
     public Alumno() {
     }
@@ -113,9 +114,17 @@ public class Alumno {
         this.sexo = sexo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "Alumno{" + "id_alumno=" + id_alumno + ", nombre=" + nombre + ", apellido_paterno=" + apellido_paterno + ", apellido_materno=" + apellido_materno + ", fecha_registro=" + fecha_registro + ", telefono_contacto=" + telefono_contacto + ", id_clase_registrada=" + id_clase_registrada + ", horario=" + horario + ", id_maestro=" + id_maestro + ", email=" + email + ", edad=" + edad + ", sexo=" + sexo + '}';
+        return "Alumno{" + "id_alumno=" + id_alumno + ", nombre=" + nombre + ", apellido_paterno=" + apellido_paterno + ", apellido_materno=" + apellido_materno + ", fecha_registro=" + fecha_registro + ", telefono_contacto=" + telefono_contacto + ", id_clase_registrada=" + id_clase_registrada + ", horario=" + horario + ", id_maestro=" + id_maestro + ", email=" + email + ", edad=" + edad + ", sexo=" + sexo + ", status=" + status + '}';
     }
     
 }

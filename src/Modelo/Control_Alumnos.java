@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.Alumno;
+import Controlador.Clases;
 import Controlador.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -93,7 +94,7 @@ public class Control_Alumnos {
         return resultado;
     }
     
-    public Alumno recuperaAlumno(Alumno alumno){
+    public Alumno recuperaAlumno(Alumno alumno, Clases clase){
         this.id_alumno = alumno.getId_alumno();
         String sql = "";
         Conexion con = new Conexion();
@@ -101,10 +102,10 @@ public class Control_Alumnos {
         Statement st;
         ResultSet rs;
         
-        sql = "SELECT id_alumno, nombre, apellido_paterno, id_clase_registrada, status "
-                + "FROM alumno WHERE id_alumno = '"+id_alumno+"'";
+        sql = "SELECT a.id_alumno, a.nombre, a.apellido_paterno, b.NombreClase, a.status "
+                + "from alumno a, clase b WHERE a.id_clase_registrada = b.ID and id_alumno = '"+id_alumno+"'";
         
-        JOptionPane.showMessageDialog(null, sql);
+        //JOptionPane.showMessageDialog(null, sql);
         
         try {
             conn = con.conectar();
@@ -124,6 +125,8 @@ public class Control_Alumnos {
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setId_alumno(rs.getString("id_alumno"));
                 alumno.setApellido_paterno(rs.getString("apellido_paterno"));
+                clase.setNombreClase(rs.getString("NombreClase"));
+                alumno.setStatus(rs.getString("status"));
                 
                 return alumno;
             }else{
@@ -134,6 +137,39 @@ public class Control_Alumnos {
         }
         
         return alumno;
+    }
+    
+    public int bajaAlumno(String id_alumno){
+        this.id_alumno = id_alumno;
+        int bandera;
+        String sql = "";
+        Conexion con = new Conexion();
+        Connection conn = null;
+        Statement st;
+        ResultSet rs;
+        PreparedStatement ps;
+        
+        sql = "UPDATE alumno set status = 'INACTIVO' WHERE id_alumno = '"+id_alumno+"'";
+        
+        try {
+            conn = con.conectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la BD");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error desconocido al intentar conectarse");
+        }
+        
+        try {
+            st = conn.createStatement();
+            ps = st.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return bandera = 0;
     }
     
     public String recuperaID() throws SQLException, ClassNotFoundException{
