@@ -21,6 +21,7 @@ public class Baja_Alumno extends javax.swing.JFrame {
     public Baja_Alumno() {
         initComponents();
         jChBaja.setVisible(false);
+        jButton1.setVisible(false);
         
     }
 
@@ -135,9 +136,11 @@ public class Baja_Alumno extends javax.swing.JFrame {
         ca.recuperaAlumno(al, clase);
         
         if(al.getStatus().toUpperCase().equals("ACTIVO")||al.getStatus().toUpperCase().equals("INACTIVO")){
-            jLblNombre.setText(al.getNombre()+" "+al.getApellido_paterno()+" "+clase.getNombreClase().toUpperCase());
-            jLblStatus.setText(al.getStatus());
+            jLblNombre.setText(al.getNombre().toUpperCase()+" "+al.getApellido_paterno().toUpperCase()
+                    +" "+clase.getNombreClase().toUpperCase());
+            jLblStatus.setText(al.getStatus().toUpperCase());
             jChBaja.setVisible(true);
+            jButton1.setVisible(true);
         }else{
             jLblNombre.setText("ALUMNO NO EXISTENTE EN LA BASE DE DATOS, FAVOR DE VERIFICAR");
         }    

@@ -19,6 +19,13 @@ public class Control_Maestros {
         m.setId_clase(this.recuperaIDClase());
     }
     
+    
+    public int altaMaestro(){
+        int bandera = 0;
+        
+        return bandera;
+    }
+    
     public String generaIDMaestro(){
         String aux="";
         
@@ -28,7 +35,6 @@ public class Control_Maestros {
                 +m.getApellido_materno().substring(0,1).toUpperCase()+aux;
 
     }
-    
     
     public final String recuperaIDClase(){
         switch (m.getClase().toLowerCase()){

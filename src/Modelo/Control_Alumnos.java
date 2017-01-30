@@ -145,11 +145,9 @@ public class Control_Alumnos {
         String sql = "";
         Conexion con = new Conexion();
         Connection conn = null;
-        Statement st;
-        ResultSet rs;
         PreparedStatement ps;
         
-        sql = "UPDATE alumno set status = 'INACTIVO' WHERE id_alumno = '"+id_alumno+"'";
+        sql = "UPDATE alumno set status = 'INACTIVO' WHERE id_alumno = ?";
         
         try {
             conn = con.conectar();
@@ -160,16 +158,20 @@ public class Control_Alumnos {
             Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error desconocido al intentar conectarse");
         }
-        
+
         try {
-            st = conn.createStatement();
-            ps = st.executeUpdate(sql);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id_alumno);
+            ps.executeUpdate();
+            
+            conn.close();
+            
+            bandera = 1;
         } catch (SQLException ex) {
             Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            bandera = 0;
         }
-        
-        
-        return bandera = 0;
+        return bandera;
     }
     
     public String recuperaID() throws SQLException, ClassNotFoundException{
