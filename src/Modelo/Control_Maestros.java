@@ -1,6 +1,13 @@
 package Modelo;
 
+import Controlador.Conexion;
 import Controlador.Maestro;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Control_Maestros {
     String id_maestro ="";
@@ -9,35 +16,65 @@ public class Control_Maestros {
     String a_materno="";
     String id_clase="";
     String clase="";
-    
-    Maestro m = new Maestro();
 
-    public Control_Maestros(String nombre, String a_paterno, String a_materno, String clase) {
-        m.setNombre(nombre);
-        m.setApellido_paterno(a_paterno);
-        m.setApellido_materno(a_materno);
-        m.setId_clase(this.recuperaIDClase());
+    public Control_Maestros(Maestro m) {
+        this.nombre = m.getNombre();
+        this.a_paterno = m.getApellido_paterno();
+        this.a_materno = m.getApellido_materno();
+        this.clase = m.getClase();
+        this.recuperaIDClase();
     }
     
     
     public int altaMaestro(){
         int bandera = 0;
+        String sql="";
+        Conexion con = new Conexion();
+        Connection conn = null;
+        
+        this.id_maestro=this.generaIDMaestro();
+        
+        sql = "INSERT INTO maestro values (?,?,?,?,?)";
+        PreparedStatement ps;
+        
+        try {
+            conn = con.conectar();
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, this.id_maestro);
+            ps.setString(2, this.nombre);
+            ps.setString(3, this.a_paterno);
+            ps.setString(4, this.a_materno);
+            ps.setString(5,this.id_clase);
+            
+            ps.execute();
+            conn.close();
+            
+            bandera = 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Maestros.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error de SQL");
+            bandera = 0;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Control_Maestros.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error de Inesperado");
+            bandera = 0;
+        }
         
         return bandera;
     }
     
     public String generaIDMaestro(){
         String aux="";
+        aux=id_clase.substring(3, 5);
         
-        aux=m.getId_clase().substring(3, 2);
-        
-        return m.getNombre().substring(0,1).toUpperCase()+m.getApellido_paterno().substring(0, 1).toUpperCase()
-                +m.getApellido_materno().substring(0,1).toUpperCase()+aux;
+        return nombre.substring(0,1).toUpperCase()+a_paterno.substring(0, 1).toUpperCase()
+                +a_materno.substring(0,1).toUpperCase()+aux;
 
     }
     
     public final String recuperaIDClase(){
-        switch (m.getClase().toLowerCase()){
+        switch (clase.toLowerCase()){
             case "coreano basico":
                 id_clase="KOR01";
                 break;

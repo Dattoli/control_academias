@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Uknown
@@ -53,6 +55,11 @@ public class Principal extends javax.swing.JFrame {
         jbAltaM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbAltaM.setText("ALTA");
         jbAltaM.setActionCommand("");
+        jbAltaM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaMActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("ACTUALIZACION / REGISTRO");
@@ -63,10 +70,20 @@ public class Principal extends javax.swing.JFrame {
 
         jbBajaM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbBajaM.setText("BAJA");
+        jbBajaM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaMActionPerformed(evt);
+            }
+        });
 
         jbModifiacionM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbModifiacionM.setText("MODIFIACION");
         jbModifiacionM.setActionCommand("");
+        jbModifiacionM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModifiacionMActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 204));
@@ -83,10 +100,20 @@ public class Principal extends javax.swing.JFrame {
 
         jbBajaA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbBajaA.setText("BAJA");
+        jbBajaA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaAActionPerformed(evt);
+            }
+        });
 
         jbModifiacionA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbModifiacionA.setText("MODIFIACION");
         jbModifiacionA.setActionCommand("");
+        jbModifiacionA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModifiacionAActionPerformed(evt);
+            }
+        });
 
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setText("ASISTENCIA / PAGOS");
@@ -94,6 +121,11 @@ public class Principal extends javax.swing.JFrame {
         jbAsistencia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbAsistencia.setText("ASISTENCIA");
         jbAsistencia.setActionCommand("");
+        jbAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAsistenciaActionPerformed(evt);
+            }
+        });
 
         jbPagos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbPagos.setText("PAGOS");
@@ -182,6 +214,35 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
         al.setVisible(true);
     }//GEN-LAST:event_jbAltaAActionPerformed
+
+    private void jbAltaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaMActionPerformed
+        this.dispose();
+        
+        new Alta_Maestro().setVisible(true);
+    }//GEN-LAST:event_jbAltaMActionPerformed
+
+    private void jbBajaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaAActionPerformed
+        this.dispose();
+        
+        new Baja_Alumno().setVisible(true);
+    }//GEN-LAST:event_jbBajaAActionPerformed
+
+    private void jbBajaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaMActionPerformed
+        JOptionPane.showMessageDialog(null, "Opcion no disponible por el momento");
+    }//GEN-LAST:event_jbBajaMActionPerformed
+
+    private void jbModifiacionMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModifiacionMActionPerformed
+        JOptionPane.showMessageDialog(null, "Opcion no disponible por el momento");
+    }//GEN-LAST:event_jbModifiacionMActionPerformed
+
+    private void jbModifiacionAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModifiacionAActionPerformed
+        JOptionPane.showMessageDialog(null, "Opcion no disponible por el momento");
+    }//GEN-LAST:event_jbModifiacionAActionPerformed
+
+    private void jbAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAsistenciaActionPerformed
+        this.dispose();
+        new Asistencia().setVisible(true);
+    }//GEN-LAST:event_jbAsistenciaActionPerformed
 
     /**
      * @param args the command line arguments

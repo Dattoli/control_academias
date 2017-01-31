@@ -31,6 +31,8 @@ public class Control_Alumnos {
     String horario = "";
     String id_clase="";
     String id_maestro ="";
+    String id_asistencia = "";
+    String fechaAsistencia = "";
     
     public Control_Alumnos(String nombre, String a_paterno, String a_materno, String email, int edad, String sexo,
             String fecha, String telefono, String clase, String horario){
@@ -174,6 +176,45 @@ public class Control_Alumnos {
         return bandera;
     }
     
+    public int asistencia(Alumno alumno, String fecha){
+        this.id_alumno = alumno.getId_alumno();
+        int bandera = 0;
+        String sql = "";
+        Conexion con = new Conexion();
+        Connection conn = null;
+        this.fechaAsistencia = fecha;
+        
+//JOptionPane.showMessageDialog(null, id_clase+" "+id_maestro);
+        sql = "INSERT INTO asistencia values(?,?,?,?,?)";
+        PreparedStatement ps;
+        try {
+            id_asistencia = this.recuperaIdAsistencia().toString();
+            
+            conn = con.conectar();
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, id_asistencia);
+            ps.setString(2, id_alumno);
+            ps.setString(3, alumno.getNombre());
+            ps.setString(4, alumno.getApellido_paterno());
+            ps.setString(5, fechaAsistencia);
+            ps.execute();
+            conn.close();
+            bandera = 1;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error de SQL");
+            bandera = 0;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error Inesperado");
+            bandera = 0;
+        }
+            
+        return bandera;
+    }
+    
     public String recuperaID() throws SQLException, ClassNotFoundException{
         String sql="";
         int resultadob=0;
@@ -200,6 +241,38 @@ public class Control_Alumnos {
                 resultado = "0000"+ resultadob;
             }
             
+        }else{
+            resultado = "00001";
+        }
+        
+        return resultado;
+    }
+    
+    public String recuperaIdAsistencia() throws SQLException, ClassNotFoundException{
+        String sql="";
+        int resultadob=0;
+        String resultado = "";
+        Conexion con = new Conexion();
+        Connection conn = null;
+        
+        sql = "SELECT COUNT(id_asistencia) as id_asistencia FROM asistencia";
+        conn = con.conectar();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        
+        if(rs.next()){
+            
+            resultado = rs.getString("id_asistencia");
+            resultadob =Integer.parseInt(resultado)+1;
+            if(resultadob<10){
+                resultado = "0000"+ resultadob;
+            }else if(resultadob>=10 && resultadob<100){
+                resultado = "000"+ resultadob;
+            }else if(resultadob>=100 && resultadob<1000){
+                resultado = "00"+ resultadob;
+            }else{
+                resultado = "0000"+ resultadob;
+            }
         }else{
             resultado = "00001";
         }

@@ -135,6 +135,9 @@
         <Property name="text" type="java.lang.String" value="ALTA"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAltaMActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -164,6 +167,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="BAJA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBajaMActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbModifiacionM">
       <Properties>
@@ -173,6 +179,9 @@
         <Property name="text" type="java.lang.String" value="MODIFIACION"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbModifiacionMActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -204,6 +213,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="BAJA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBajaAActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbModifiacionA">
       <Properties>
@@ -213,6 +225,9 @@
         <Property name="text" type="java.lang.String" value="MODIFIACION"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbModifiacionAActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -230,6 +245,9 @@
         <Property name="text" type="java.lang.String" value="ASISTENCIA"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAsistenciaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbPagos">
       <Properties>

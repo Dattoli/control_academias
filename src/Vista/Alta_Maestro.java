@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Maestro;
 import Modelo.Control_Maestros;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -131,15 +132,24 @@ public class Alta_Maestro extends javax.swing.JFrame {
     private void jBAltaMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAltaMaestroActionPerformed
         Maestro maestro = new Maestro();
         Control_Maestros cmaestro;
+        int bandera;
+        
         maestro.setNombre(jTxtNombre.getText().toUpperCase());
         maestro.setApellido_paterno(jTxtApellidoPaterno.getText().toUpperCase());
         maestro.setApellido_materno(jTxtApellidoMaterno.getText().toUpperCase());
         maestro.setClase(jComboBox1.getSelectedItem().toString().toUpperCase());
         
-        cmaestro = new Control_Maestros(maestro.getNombre(), maestro.getApellido_paterno(), maestro.getApellido_materno(),
-                        maestro.getClase());
+        cmaestro = new Control_Maestros(maestro);
         
-        maestro.altaMaestro();
+        bandera = cmaestro.altaMaestro();
+        
+        if(bandera == 1){
+            JOptionPane.showMessageDialog(null, "Maestro dado de alta correctamente");
+            this.dispose();
+            new Principal().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "No se pudo dar de alta el maestro");
+        }
     }//GEN-LAST:event_jBAltaMaestroActionPerformed
 
     /**
