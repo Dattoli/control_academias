@@ -47,6 +47,12 @@ public class Inicio extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
+        jPassUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPassUsuarioActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("USUARIO");
 
@@ -58,6 +64,11 @@ public class Inicio extends javax.swing.JFrame {
         jBtnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEntrarActionPerformed(evt);
+            }
+        });
+        jBtnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jBtnEntrarKeyPressed(evt);
             }
         });
 
@@ -131,13 +142,7 @@ public class Inicio extends javax.swing.JFrame {
         usuario = jTxtUsuario.getText();
         password = jPassUsuario.getText();
         
-        try {
-            resultado = log.loginUsuario(usuario, password);
-        } catch (SQLException ex) {
-            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        resultado = log.loginUsuario(usuario, password);
         
         /*ControlAcceso control = new ControlAcceso(usuario, password);
         control.concedeAcceso();*/
@@ -153,6 +158,56 @@ public class Inicio extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jBtnEntrarActionPerformed
+
+    private void jPassUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPassUsuarioActionPerformed
+        Principal pr = new Principal();
+        LoginUsuario log = new LoginUsuario();
+        int resultado = 0;
+        
+        String usuario="";
+        String password = "";    
+        usuario = jTxtUsuario.getText();
+        password = jPassUsuario.getText();
+        
+        resultado = log.loginUsuario(usuario, password);
+        
+        /*ControlAcceso control = new ControlAcceso(usuario, password);
+        control.concedeAcceso();*/
+        
+        if(resultado == 1){
+            this.setVisible(false);
+            pr.setVisible(true);
+        }else{
+            jTxtUsuario.setText("");
+            jPassUsuario.setText("");
+            jLblError.setText("Contraseña y/o Usuario incorrectos");
+        }
+    }//GEN-LAST:event_jPassUsuarioActionPerformed
+
+    private void jBtnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnEntrarKeyPressed
+        Principal pr = new Principal();
+        LoginUsuario log = new LoginUsuario();
+        int resultado = 0;
+        
+        String usuario="";
+        String password = "";    
+        usuario = jTxtUsuario.getText();
+        password = jPassUsuario.getText();
+        
+        resultado = log.loginUsuario(usuario, password);
+        
+        /*ControlAcceso control = new ControlAcceso(usuario, password);
+        control.concedeAcceso();*/
+        
+        if(resultado == 1){
+            this.setVisible(false);
+            pr.setVisible(true);
+        }else{
+            jTxtUsuario.setText("");
+            jPassUsuario.setText("");
+            jLblError.setText("Contraseña y/o Usuario incorrectos");
+        }
+    }//GEN-LAST:event_jBtnEntrarKeyPressed
 
     /**
      * @param args the command line arguments

@@ -8,8 +8,11 @@ package Vista;
 import Controlador.Alumno;
 import Controlador.Clases;
 import Modelo.Control_Alumnos;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,8 +30,8 @@ public class Asistencia extends javax.swing.JFrame {
         jBEnviar.setVisible(false);
         jChkAsistencia.setVisible(false);
         
-        Date fecha = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fecha = new Date();
         
         jLblFecha.setText(formato.format(fecha).toString());
     }
@@ -52,6 +55,7 @@ public class Asistencia extends javax.swing.JFrame {
         jChkAsistencia = new javax.swing.JCheckBox();
         jBEnviar = new javax.swing.JButton();
         jBVolver = new javax.swing.JButton();
+        jLblPago = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +93,9 @@ public class Asistencia extends javax.swing.JFrame {
             }
         });
 
+        jLblPago.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLblPago.setForeground(new java.awt.Color(0, 102, 255));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,6 +103,7 @@ public class Asistencia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLblPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLblAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
@@ -109,11 +117,11 @@ public class Asistencia extends javax.swing.JFrame {
                         .addComponent(jLblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jChkAsistencia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                         .addComponent(jBEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(140, 140, 140)
                 .addComponent(jBVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -133,12 +141,14 @@ public class Asistencia extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLblAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLblPago, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jChkAsistencia)
                     .addComponent(jBEnviar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBVolver)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,6 +173,8 @@ public class Asistencia extends javax.swing.JFrame {
             jLblAlumno.setText(al.getNombre().toUpperCase()+" "+al.getApellido_paterno().toUpperCase()
                     +", CLASE: "+clase.getNombreClase().toUpperCase());
             jBEnviar.setVisible(true);
+            jLblPago.setText("PRÓXIMO PAGO: "+ca.obtenerFechaPago(jTxtIdAlumno.getText().toString())
+                    +" STATUS "+pagado().toString());
             jChkAsistencia.setVisible(true);
         }else{
             jLblAlumno.setText("ALUMNO NO EXISTENTE O SE ENCUENTRA INACTIVO");
@@ -195,6 +207,36 @@ public class Asistencia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBEnviarActionPerformed
 
+    private String pagado(){
+        String leyenda="";
+        Control_Alumnos ca=new Control_Alumnos();
+        int bf = 0;
+        boolean bc;
+        Date fechaActual = new Date();;
+        Date fechaPago = null;
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            fechaPago = formateador.parse(ca.obtenerFechaPago(jTxtIdAlumno.getText().toString()));
+            bf = fechaActual.compareTo(fechaPago);
+            bc = fechaPago.before(fechaActual);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(bf < 0){
+            if(bc = true){
+                leyenda = "PENDIENTE";
+            }else{
+                leyenda = "PAGADO";
+            }
+        }else{
+            leyenda = "FECHA IGUAL";
+        }
+        
+        return leyenda;   
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -239,6 +281,7 @@ public class Asistencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLblAlumno;
     private javax.swing.JLabel jLblFecha;
+    private javax.swing.JLabel jLblPago;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTxtIdAlumno;
     // End of variables declaration//GEN-END:variables
