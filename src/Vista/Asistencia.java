@@ -174,7 +174,7 @@ public class Asistencia extends javax.swing.JFrame {
                     +", CLASE: "+clase.getNombreClase().toUpperCase());
             jBEnviar.setVisible(true);
             jLblPago.setText("PRÓXIMO PAGO: "+ca.obtenerFechaPago(jTxtIdAlumno.getText().toString())
-                    +" STATUS "+pagado().toString());
+                    +" STATUS ");
             jChkAsistencia.setVisible(true);
         }else{
             jLblAlumno.setText("ALUMNO NO EXISTENTE O SE ENCUENTRA INACTIVO");
@@ -212,7 +212,7 @@ public class Asistencia extends javax.swing.JFrame {
         Control_Alumnos ca=new Control_Alumnos();
         int bf = 0;
         boolean bc;
-        Date fechaActual = new Date();;
+        Date fechaActual = new Date();
         Date fechaPago = null;
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         

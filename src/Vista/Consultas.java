@@ -37,7 +37,7 @@ public class Consultas extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jCmbClase = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jTblConsulta.setModel(modeloTabla);
