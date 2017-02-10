@@ -131,6 +131,11 @@ public class Principal extends javax.swing.JFrame {
 
         jbPagos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbPagos.setText("PAGOS");
+        jbPagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPagosActionPerformed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));
         jLabel6.setText("CONSULTAS");
@@ -270,6 +275,11 @@ public class Principal extends javax.swing.JFrame {
     private void jbAsistencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAsistencia1ActionPerformed
         new Consultas().setVisible(true);
     }//GEN-LAST:event_jbAsistencia1ActionPerformed
+
+    private void jbPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPagosActionPerformed
+        this.dispose();
+        new Pagos().setVisible(true);
+    }//GEN-LAST:event_jbPagosActionPerformed
 
     /**
      * @param args the command line arguments

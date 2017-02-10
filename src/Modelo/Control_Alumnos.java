@@ -364,6 +364,79 @@ public class Control_Alumnos {
         return fechaPago;
     }
     
+    public int registraPago(String id_alumno, String fecha, String pago){
+        this.id_alumno = id_alumno;
+        this.fechaPago = fecha;
+        String cantidad = pago;
+        int bandera = 0;
+        String sqll = "";
+        String sql2 = "";
+        String resultado = "";
+        int resultadob = 0;
+        Conexion con = new Conexion();
+        Connection conn = null;
+        
+        sqll = "SELECT MAX(id_pago) as id_pago FROM pagos";
+        
+        //Obtenemos el ID del Pago a Insertar
+        try {
+            conn = con.conectar();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sqll);
+            
+            if(rs.next()){
+                //JOptionPane.showMessageDialog(null, rs.getString("id_alumno"));
+                resultado = rs.getString("id_pago");
+                resultadob =Integer.parseInt(resultado)+1;
+                if(resultadob<10){
+                    resultado = "0000"+ resultadob;
+                }else if(resultadob>=10 && resultadob<100){
+                    resultado = "000"+ resultadob;
+                }else if(resultadob>=100 && resultadob<1000){
+                    resultado = "00"+ resultadob;
+                }else{
+                    resultado = "0000"+ resultadob;
+                }
+            }else{
+                resultado = "00001";
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al generar el ID del Pago");
+            bandera = 0;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error desconocido al generar el ID Pago");
+            bandera = 0;
+        }
+        
+        //Insertamos el Pago en la Tabla
+        
+        sql2 = "INSERT INTO pagos values(?,?,?,?)";
+        PreparedStatement ps;
+        
+        try {
+            ps = conn.prepareStatement(sql2);
+            
+            ps.setString(1, resultado);
+            ps.setString(2, this.id_alumno);
+            ps.setString(3, fechaPago);
+            ps.setString(4, cantidad);
+            
+            ps.execute();
+            conn.close();
+            bandera = 1;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Control_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al Insertar el Pago");
+            bandera = 0;
+        }
+        
+        return bandera;
+    }
+    
     /*SECCION DE METODOS PARA CONSULTA DE DATOS*/
     
     public String[] getColumnas(String opcion){

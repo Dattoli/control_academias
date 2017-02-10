@@ -8,6 +8,7 @@ package Vista;
 import Controlador.Alumno;
 import Controlador.Clases;
 import Modelo.Control_Alumnos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,6 +72,11 @@ public class Pagos extends javax.swing.JFrame {
 
         jButtonPago.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonPago.setText("Registrar Pago");
+        jButtonPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPagoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,11 +151,38 @@ public class Pagos extends javax.swing.JFrame {
             jLblPago.setVisible(true);
             jTxtPago.setVisible(true);
             jButtonPago.setVisible(true);
+            jTxtPago.requestFocus();
+            
         }else{
             jLblNombre.setText("ALUMNO NO EXISTENTE O SE ENCUENTRA INACTIVO");
             jLblNombre.setVisible(true);
         } 
     }//GEN-LAST:event_jTxtIdAlumnoActionPerformed
+
+    private void jButtonPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPagoActionPerformed
+        Control_Alumnos ca=new Control_Alumnos();
+        int bandera;
+        
+        if(jTxtPago.getText().length()==0){
+            JOptionPane.showMessageDialog(null, "Debes poner una cantidad correcta");
+        }else{
+            bandera = ca.registraPago(jTxtIdAlumno.getText().toString(), ca.obtenerFechaPago(jTxtIdAlumno.getText().toString()),
+                jTxtPago.getText());
+            
+            if(bandera == 1){
+                JOptionPane.showMessageDialog(null, "Pago registrado de manera exitosa");
+                jLblFechaPago.setVisible(false);
+                jLblNombre.setVisible(false);
+                jLblPago.setVisible(false);
+                jTxtPago.setVisible(false);
+                jButtonPago.setVisible(false);
+                jTxtIdAlumno.setText("");
+                jTxtIdAlumno.requestFocus();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se pudo registrar el Pago");
+            }
+        }         
+    }//GEN-LAST:event_jButtonPagoActionPerformed
 
     /**
      * @param args the command line arguments
