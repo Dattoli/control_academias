@@ -7,12 +7,14 @@ package Vista;
 import Controlador.ControlAcceso;
 import Controlador.*;
 import Modelo.LoginUsuario;
+import Modelo.Logo_Panel;
 import Modelo.Probando;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Uknown
@@ -24,6 +26,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -41,11 +44,12 @@ public class Inicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jBtnEntrar = new javax.swing.JButton();
-        jLblError = new javax.swing.JLabel();
+        logo_Panel1 = new Modelo.Logo_Panel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(54, 130, 252));
 
         jPassUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,9 +58,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USUARIO");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CONTRASEÑA");
 
         jBtnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -72,50 +78,64 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jLblError.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLblError.setForeground(new java.awt.Color(255, 0, 0));
-        jLblError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.GroupLayout logo_Panel1Layout = new javax.swing.GroupLayout(logo_Panel1);
+        logo_Panel1.setLayout(logo_Panel1Layout);
+        logo_Panel1Layout.setHorizontalGroup(
+            logo_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 147, Short.MAX_VALUE)
+        );
+        logo_Panel1Layout.setVerticalGroup(
+            logo_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 127, Short.MAX_VALUE)
+        );
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("SISTEMA DE CONTROL DE ACADEMIAS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jBtnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTxtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addComponent(jPassUsuario)
-                    .addComponent(jLblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(64, 64, 64))
+                        .addComponent(logo_Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPassUsuario)
+                                    .addComponent(jTxtUsuario)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jBtnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPassUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnEntrar)
-                .addGap(18, 18, 18)
-                .addComponent(jLblError)
-                .addGap(21, 21, 21))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPassUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnEntrar))
+                    .addComponent(logo_Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(182, 182, 182))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,88 +146,90 @@ public class Inicio extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
+    private void jBtnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnEntrarKeyPressed
         Principal pr = new Principal();
         LoginUsuario log = new LoginUsuario();
         int resultado = 0;
-        
+
         String usuario="";
-        String password = "";    
+        String password = "";
         usuario = jTxtUsuario.getText();
         password = jPassUsuario.getText();
-        
+
         resultado = log.loginUsuario(usuario, password);
-        
+
         /*ControlAcceso control = new ControlAcceso(usuario, password);
         control.concedeAcceso();*/
-        
+
         if(resultado == 1){
             this.setVisible(false);
             pr.setVisible(true);
         }else{
             jTxtUsuario.setText("");
+            jTxtUsuario.requestFocus();
             jPassUsuario.setText("");
-            jLblError.setText("Contraseña y/o Usuario incorrectos");
+            JOptionPane.showMessageDialog(null, "Uusuario y/o Contraseña Erronea");
         }
-        
-        
+    }//GEN-LAST:event_jBtnEntrarKeyPressed
+
+    private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
+        Principal pr = new Principal();
+        LoginUsuario log = new LoginUsuario();
+        int resultado = 0;
+
+        String usuario="";
+        String password = "";
+        usuario = jTxtUsuario.getText();
+        password = jPassUsuario.getText();
+
+        resultado = log.loginUsuario(usuario, password);
+
+        /*ControlAcceso control = new ControlAcceso(usuario, password);
+        control.concedeAcceso();*/
+
+        if(resultado == 1){
+            this.setVisible(false);
+            pr.setVisible(true);
+        }else{
+            jTxtUsuario.setText("");
+            jTxtUsuario.requestFocus();
+            jPassUsuario.setText("");
+            JOptionPane.showMessageDialog(null, "Uusuario y/o Contraseña Erronea");
+        }
+
     }//GEN-LAST:event_jBtnEntrarActionPerformed
 
     private void jPassUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPassUsuarioActionPerformed
         Principal pr = new Principal();
         LoginUsuario log = new LoginUsuario();
         int resultado = 0;
-        
+
         String usuario="";
-        String password = "";    
+        String password = "";
         usuario = jTxtUsuario.getText();
         password = jPassUsuario.getText();
-        
+
         resultado = log.loginUsuario(usuario, password);
-        
+
         /*ControlAcceso control = new ControlAcceso(usuario, password);
         control.concedeAcceso();*/
-        
+
         if(resultado == 1){
             this.setVisible(false);
             pr.setVisible(true);
         }else{
             jTxtUsuario.setText("");
+            jTxtUsuario.requestFocus();
             jPassUsuario.setText("");
-            jLblError.setText("Contraseña y/o Usuario incorrectos");
+            JOptionPane.showMessageDialog(null, "Uusuario y/o Contraseña Erronea");
         }
     }//GEN-LAST:event_jPassUsuarioActionPerformed
-
-    private void jBtnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnEntrarKeyPressed
-        Principal pr = new Principal();
-        LoginUsuario log = new LoginUsuario();
-        int resultado = 0;
-        
-        String usuario="";
-        String password = "";    
-        usuario = jTxtUsuario.getText();
-        password = jPassUsuario.getText();
-        
-        resultado = log.loginUsuario(usuario, password);
-        
-        /*ControlAcceso control = new ControlAcceso(usuario, password);
-        control.concedeAcceso();*/
-        
-        if(resultado == 1){
-            this.setVisible(false);
-            pr.setVisible(true);
-        }else{
-            jTxtUsuario.setText("");
-            jPassUsuario.setText("");
-            jLblError.setText("Contraseña y/o Usuario incorrectos");
-        }
-    }//GEN-LAST:event_jBtnEntrarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -248,9 +270,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLblError;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JPasswordField jPassUsuario;
     public static javax.swing.JTextField jTxtUsuario;
+    private Modelo.Logo_Panel logo_Panel1;
     // End of variables declaration//GEN-END:variables
 }
